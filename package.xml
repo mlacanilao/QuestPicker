@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Meta>
+  <title>Quest Picker</title>
+  <id>omegaplatinum.elin.questpicker</id>
+  <author>OmegaPlatinum</author>
+  <loadPriority>100</loadPriority>
+  <description>
+    Supports Game Version: 0.23.55
+
+    Allows players to manually select quests to show up on the quest board.
+
+    [h1] Features [/h1]
+    [list]
+    [*]Enables players to choose quests through the Config menu under the Mods Tab.
+    [*]Compatible with existing save files.
+    [*]Includes localization for English, Japanese, and Chinese.
+    [/list]
+
+    [h1] Compatibility [/h1]
+    This mod works with existing save files and does not require any manual setup.
+
+    [h1] Requirements [/h1]
+    This mod requires the [b]Mod Options[/b] mod only for accessing the Config menu. The core functionality of this mod will still work without it. Please subscribe to the [b]Mod Options[/b] mod for menu-based configuration:
+    [list]
+    [*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3381182341]https://steamcommunity.com/sharedfiles/filedetails/?id=3381182341[/url]
+    [/list]
+
+    [h1] Configuration File Location [/h1]
+    If needed, users can also edit the configuration file directly:
+    [code] Steam\steamapps\common\Elin\BepInEx\config\omegaplatinum.elin.questpicker.cfg [/code]
+
+    [img]https://i.imgur.com/pbguplP.png[/img]
+
+    クエストボードに表示されるクエストを、Mods タブの Config メニューを通じて手動で選択できるようにします。
+
+    [h1] 特徴 [/h1]
+    [list]
+    [*]クエストボード用のカスタマイズ可能なクエスト選択機能を追加します。
+    [*]ゲーム内の Config メニューから設定可能です。
+    [*]英語、日本語、中国語の多言語サポートを提供します。
+    [/list]
+
+    [h1] 互換性 [/h1]
+    このMODは既存のセーブデータで動作し、特別な設定は不要です。
+
+    [h1] 必須MOD [/h1]
+    このMODは [b]Mod Options[/b] MOD が必要です。ただし、Config メニューにアクセスするためだけです。主要な機能はこれなしでも動作します。[b]Mod Options[/b] MOD をサブスクライブするには、以下のリンクを参照してください：
+    [list]
+    [*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3381182341]https://steamcommunity.com/sharedfiles/filedetails/?id=3381182341[/url]
+    [/list]
+
+    [h1] 設定ファイルの場所 [/h1]
+    必要に応じて、以下の場所から設定ファイルを直接編集することもできます：
+    [code] Steam\steamapps\common\Elin\BepInEx\config\omegaplatinum.elin.questpicker.cfg [/code]
+
+    [img]https://i.imgur.com/Vw6Rt1n.png[/img]
+  </description>
+  <tags>Cheat</tags>
+  <visibility>Public</visibility>
+  <version>0.23.55</version>
+</Meta>

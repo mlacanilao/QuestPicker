@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ConfigLayoutSchema.xsd">
+    <hlayout>
+        <vlayout border="true">
+            <topic>Deliver</topic>
+            <toggle id="deliverToggle">
+                <contentId>Deliver</contentId>
+                <tooltip>deliver.toggle.tooltip</tooltip>
+            </toggle>
+
+            <topic>Escort</topic>
+            <toggle id="escortToggle">
+                <contentId>Escort 1</contentId>
+                <tooltip>escort.toggle.tooltip</tooltip>
+            </toggle>
+            <toggle id="escort2Toggle">
+                <contentId>Escort 2</contentId>
+                <tooltip>escort2.toggle.tooltip</tooltip>
+            </toggle>
+            <toggle id="escort3Toggle">
+                <contentId>Escort 3</contentId>
+                <tooltip>escort3.toggle.tooltip</tooltip>
+            </toggle>
+
+            <topic>Farm</topic>
+            <toggle id="harvestToggle">
+                <contentId>Harvest</contentId>
+                <tooltip>harvest.toggle.tooltip</tooltip>
+            </toggle>
+
+            <topic>Monster</topic>
+            <toggle id="huntToggle">
+                <contentId>Hunt</contentId>
+                <tooltip>hunt.toggle.tooltip</tooltip>
+            </toggle>
+            <toggle id="huntRaceToggle">
+                <contentId>Hunt Race</contentId>
+                <tooltip>huntRace.toggle.tooltip</tooltip>
+            </toggle>
+            <toggle id="subdueToggle">
+                <contentId>Subdue</contentId>
+                <tooltip>subdue.toggle.tooltip</tooltip>
+            </toggle>
+
+            <topic>Music</topic>
+            <toggle id="musicToggle">
+                <contentId>Music</contentId>
+                <tooltip>music.toggle.tooltip</tooltip>
+            </toggle>
+
+            <topic>Supply</topic>
+            <toggle id="supplyToggle">
+                <contentId>Supply</contentId>
+                <tooltip>supply.toggle.tooltip</tooltip>
+            </toggle>
+            <toggle id="supplyBulk_junkToggle">
+                <contentId>Supply Bulk Junk</contentId>
+                <tooltip>supplyBulk_junk.toggle.tooltip</tooltip>
+            </toggle>
+            <toggle id="supplyBulk_resourceToggle">
+                <contentId>Supply Bulk Resource</contentId>
+                <tooltip>supplyBulk_resource.toggle.tooltip</tooltip>
+            </toggle>
+        </vlayout>
+        <vlayout border="true">
+            <topic>War</topic>
+            <toggle id="defenseGameToggle">
+                <contentId>Defense Game 1</contentId>
+                <tooltip>defenseGame.toggle.tooltip</tooltip>
+            </toggle>
+            <toggle id="defenseGame2Toggle">
+                <contentId>Defense Game 2</contentId>
+                <tooltip>defenseGame2.toggle.tooltip</tooltip>
+            </toggle>
+            
+            <topic>Food</topic>
+            <toggle id="meal_breadToggle">
+                <contentId>Bread</contentId>
+                <tooltip>meal_bread.toggle.tooltip</tooltip>
+            </toggle>
+            <toggle id="meal_cakeToggle">
+                <contentId>Cake</contentId>
+                <tooltip>meal_cake.toggle.tooltip</tooltip>
+            </toggle>
+            <toggle id="meal_catToggle">
+                <contentId>Category</contentId>
+                <tooltip>meal_cat.toggle.tooltip</tooltip>
+            </toggle>
+            <toggle id="meal_cookieToggle">
+                <contentId>Cookie</contentId>
+                <tooltip>meal_cookie.toggle.tooltip</tooltip>
+            </toggle>
+            <toggle id="meal_eggToggle">
+                <contentId>Egg</contentId>
+                <tooltip>meal_egg.toggle.tooltip</tooltip>
+            </toggle>
+            <toggle id="meal_fishToggle">
+                <contentId>Fish</contentId>
+                <tooltip>meal_fish.toggle.tooltip</tooltip>
+            </toggle>
+            <toggle id="meal_fruitToggle">
+                <contentId>Fruit</contentId>
+                <tooltip>meal_fruit.toggle.tooltip</tooltip>
+            </toggle>
+            <toggle id="meal_meatToggle">
+                <contentId>Meat</contentId>
+                <tooltip>meal_meat.toggle.tooltip</tooltip>
+            </toggle>
+            <toggle id="meal_noodleToggle">
+                <contentId>Noodle</contentId>
+                <tooltip>meal_noodle.toggle.tooltip</tooltip>
+            </toggle>
+            <toggle id="meal_riceToggle">
+                <contentId>Rice</contentId>
+                <tooltip>meal_rice.toggle.tooltip</tooltip>
+            </toggle>
+            <toggle id="meal_soupToggle">
+                <contentId>Soup</contentId>
+                <tooltip>meal_soup.toggle.tooltip</tooltip>
+            </toggle>
+            <toggle id="meal_vegiToggle">
+                <contentId>Vegetable</contentId>
+                <tooltip>meal_vegi.toggle.tooltip</tooltip>
+            </toggle>
+        </vlayout>
+    </hlayout>
+</config>
