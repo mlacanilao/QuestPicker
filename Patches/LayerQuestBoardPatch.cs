@@ -1,3 +1,5 @@
+using QuestPicker.Config;
+
 namespace QuestPicker.Patches
 {
     public class LayerQuestBoardPatch

@@ -5,9 +5,8 @@
   <author>OmegaPlatinum</author>
   <loadPriority>100</loadPriority>
   <description>
-    Supports Game Version: 0.23.55
-
     Allows players to manually select quests to show up on the quest board.
+    クエストボードに表示されるクエストを、Mods タブの Config メニューを通じて手動で選択できるようにします。
 
     [h1] Features [/h1]
     [list]
@@ -29,9 +28,9 @@
     If needed, users can also edit the configuration file directly:
     [code] Steam\steamapps\common\Elin\BepInEx\config\omegaplatinum.elin.questpicker.cfg [/code]
 
-    [img]https://i.imgur.com/pbguplP.png[/img]
+    [img]https://steamuserimages-a.akamaihd.net/ugc/5163648040624258/6B16FE06C932512C0203E24C69D25B8208D65755/?imw=5000&amp;imh=5000&amp;ima=fit&amp;impolicy=Letterbox&amp;imcolor=%23000000&amp;letterbox=false.png[/img]
 
-    クエストボードに表示されるクエストを、Mods タブの Config メニューを通じて手動で選択できるようにします。
+    Supports Game Version: 0.23.55
 
     [h1] 特徴 [/h1]
     [list]
@@ -53,7 +52,9 @@
     必要に応じて、以下の場所から設定ファイルを直接編集することもできます：
     [code] Steam\steamapps\common\Elin\BepInEx\config\omegaplatinum.elin.questpicker.cfg [/code]
 
-    [img]https://i.imgur.com/Vw6Rt1n.png[/img]
+    [img]https://steamuserimages-a.akamaihd.net/ugc/5163648040624477/93F9F5FBC36282B3DFA11EFDD30EF42829A0B5E4/?imw=5000&amp;imh=5000&amp;ima=fit&amp;impolicy=Letterbox&amp;imcolor=%23000000&amp;letterbox=false.png[/img]
+
+    対応ゲームバージョン: 0.23.55
   </description>
   <tags>Cheat</tags>
   <visibility>Public</visibility>

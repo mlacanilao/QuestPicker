@@ -1,7 +1,7 @@
-﻿using System.IO;
-using System.Reflection;
-using BepInEx;
+﻿using BepInEx;
 using HarmonyLib;
+using QuestPicker.Config;
+using UnityEngine;
 
 namespace QuestPicker
 {
@@ -19,17 +19,21 @@ namespace QuestPicker
         private void Start()
         {
             QuestPickerConfig.LoadConfig(config: Config);
-            
-            var assemblyLocation = Path.GetDirectoryName(path: Assembly.GetExecutingAssembly().Location);
-            var xmlPath = Path.Combine(path1: assemblyLocation, path2: "QuestPickerConfig.xml");
-            QuestPickerConfig.InitializeXmlPath(xmlPath: xmlPath);
-            
-            var xlsxPath = Path.Combine(path1: assemblyLocation, path2: "translations.xlsx");
-            QuestPickerConfig.InitializeTranslationXlsxPath(xlsxPath: xlsxPath);
-            
-            UI.UIController.RegisterUI();
 
             Harmony.CreateAndPatchAll(type: typeof(Patcher));
+            
+            try
+            {
+                UI.UIController.RegisterUI();
+            }
+            catch (System.IO.FileNotFoundException)
+            {
+                Debug.LogWarning("[Quest Picker] Mod Options mod is not installed/enabled. Skipping UI registration.");
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError($"[Quest Picker] An unexpected error occurred: {ex.Message}");
+            }
         }
     }
 }

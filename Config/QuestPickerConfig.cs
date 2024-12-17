@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using BepInEx.Configuration;
 
-namespace QuestPicker
+namespace QuestPicker.Config
 {
     /// <summary>
     /// Configuration handler for QuestPicker.

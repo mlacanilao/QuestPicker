@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using EvilMask.Elin.ModOptions;
 using System.IO;
+using System.Reflection;
 using BepInEx;
 using EvilMask.Elin.ModOptions.UI;
+using QuestPicker.Config;
 
 namespace QuestPicker.UI
 {
@@ -47,6 +49,13 @@ namespace QuestPicker.UI
                 if (obj is BaseUnityPlugin plugin && plugin.Info.Metadata.GUID == ModInfo.ModOptionsGuid)
                 {
                     var controller = ModOptionController.Register(guid: ModInfo.Guid, tooptipId: "mod.tooltip");
+                    
+                    var assemblyLocation = Path.GetDirectoryName(path: Assembly.GetExecutingAssembly().Location);
+                    var xmlPath = Path.Combine(path1: assemblyLocation, path2: "QuestPickerConfig.xml");
+                    QuestPickerConfig.InitializeXmlPath(xmlPath: xmlPath);
+            
+                    var xlsxPath = Path.Combine(path1: assemblyLocation, path2: "translations.xlsx");
+                    QuestPickerConfig.InitializeTranslationXlsxPath(xlsxPath: xlsxPath);
                     
                     if (File.Exists(path: QuestPickerConfig.XmlPath))
                     {
