@@ -11,7 +11,7 @@ namespace QuestPicker
     {
         internal const string Guid = "omegaplatinum.elin.questpicker";
         internal const string Name = "Quest Picker";
-        internal const string Version = "1.0.0.0";
+        internal const string Version = "1.0.0.1";
         internal const string ModOptionsGuid = "evilmask.elinplugins.modoptions";
         internal const string ModOptionsAssemblyName = "ModOptions";
     }
@@ -27,7 +27,7 @@ namespace QuestPicker
             
             QuestPickerConfig.LoadConfig(config: Config);
 
-            Harmony.CreateAndPatchAll(type: typeof(Patcher));
+            Harmony.CreateAndPatchAll(type: typeof(Patcher), harmonyInstanceId: ModInfo.Guid);
             
             if (IsModOptionsInstalled())
             {
