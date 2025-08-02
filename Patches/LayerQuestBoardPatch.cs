@@ -19,7 +19,15 @@ namespace QuestPicker.Patches
                         int randomIndex = EClass.rnd(a: questIds.Count);
 
                         string selectedQuestId = questIds[index: randomIndex];
-
+                        
+                        if ((selectedQuestId.StartsWith(value: "deliver") || 
+                             selectedQuestId.StartsWith(value: "escort")) &&
+                            Quest.ListDeliver().Count < 1)
+                        {
+                            QuestPicker.Log(payload: $"Skipped {selectedQuestId} — no valid delivery zones.");
+                            continue;
+                        }
+                        
                         chara.quest = Quest.Create(_id: selectedQuestId, c: chara);
                     }
                 }

@@ -10,12 +10,12 @@ namespace QuestPicker.UI
 
         public static void InitializeMappings(Dictionary<string, string> questTypeMappings)
         {
-            _reverseQuestTypeMappings = questTypeMappings.ToDictionary(kvp => kvp.Value, kvp => kvp.Key);
+            _reverseQuestTypeMappings = questTypeMappings.ToDictionary(keySelector: kvp => kvp.Value, elementSelector: kvp => kvp.Key);
         }
 
         public static void OnToggleValueChanged(string contentId, bool isChecked)
         {
-            if (!_reverseQuestTypeMappings.TryGetValue(contentId, out var questId))
+            if (!_reverseQuestTypeMappings.TryGetValue(key: contentId, value: out var questId))
             {
                 return;
             }
@@ -24,15 +24,15 @@ namespace QuestPicker.UI
 
             if (isChecked)
             {
-                if (!selectedQuestIds.Contains(questId))
-                    selectedQuestIds.Add(questId);
+                if (!selectedQuestIds.Contains(item: questId))
+                    selectedQuestIds.Add(item: questId);
             }
             else
             {
-                selectedQuestIds.Remove(questId);
+                selectedQuestIds.Remove(item: questId);
             }
 
-            QuestPickerConfig.UpdateSelectedQuestIds(selectedQuestIds);
+            QuestPickerConfig.UpdateSelectedQuestIds(selectedQuestIds: selectedQuestIds);
         }
     }
 }

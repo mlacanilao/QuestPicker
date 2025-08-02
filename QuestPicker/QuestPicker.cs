@@ -46,7 +46,7 @@ namespace QuestPicker
             }
         }
         
-        private static void Log(object payload)
+        public static void Log(object payload)
         {
             Instance.Logger.LogInfo(data: payload);
         }

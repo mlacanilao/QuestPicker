@@ -42,7 +42,7 @@ namespace QuestPicker.UI
         
         public static void RegisterUI()
         {
-            UIEvents.InitializeMappings(ToggleMappings);
+            UIEvents.InitializeMappings(questTypeMappings: ToggleMappings);
             
             foreach (var obj in ModManager.ListPluginObject)
             {
@@ -89,7 +89,7 @@ namespace QuestPicker.UI
         
         public static (string name, string nameJP) GetQuestNames(string id)
         {
-            if (EClass.sources.quests.map.TryGetValue(id, out var questRow))
+            if (EClass.sources.quests.map.TryGetValue(key: id, value: out var questRow))
             {
                 return (questRow.name, questRow.name_JP);
             }
