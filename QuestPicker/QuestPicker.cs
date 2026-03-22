@@ -1,69 +1,80 @@
 ﻿using System;
-using System.Linq;
 using BepInEx;
 using HarmonyLib;
-using QuestPicker.Config;
-using UnityEngine;
 
-namespace QuestPicker
+namespace QuestPicker;
+
+public static class ModInfo
 {
-    internal static class ModInfo
-    {
-        internal const string Guid = "omegaplatinum.elin.questpicker";
-        internal const string Name = "Quest Picker";
-        internal const string Version = "1.0.0.1";
-        internal const string ModOptionsGuid = "evilmask.elinplugins.modoptions";
-        internal const string ModOptionsAssemblyName = "ModOptions";
-    }
+    public const string Guid = "omegaplatinum.elin.questpicker";
+    public const string Name = "Quest Picker";
+    public const string Version = "2.0.0";
+    internal const string ModOptionsGuid = "evilmask.elinplugins.modoptions";
+}
 
-    [BepInPlugin(GUID: ModInfo.Guid, Name: ModInfo.Name, Version: ModInfo.Version)]
-    internal class QuestPicker : BaseUnityPlugin
-    {
-        internal static QuestPicker Instance { get; private set; }
-        
-        private void Start()
-        {
-            Instance = this;
-            
-            QuestPickerConfig.LoadConfig(config: Config);
+[BepInPlugin(GUID: ModInfo.Guid, Name: ModInfo.Name, Version: ModInfo.Version)]
+internal class Plugin : BaseUnityPlugin
+{
+    internal static Plugin? Instance;
 
-            Harmony.CreateAndPatchAll(type: typeof(Patcher), harmonyInstanceId: ModInfo.Guid);
-            
-            if (IsModOptionsInstalled())
-            {
-                try
-                {
-                    UI.UIController.RegisterUI();
-                }
-                catch (Exception ex)
-                {
-                    Log(payload: $"An error occurred during UI registration: {ex.Message}");
-                }
-            }
-            else
-            {
-                Log(payload: "Mod Options is not installed. Skipping UI registration.");
-            }
-        }
-        
-        public static void Log(object payload)
-        {
-            Instance.Logger.LogInfo(data: payload);
-        }
-        
-        private bool IsModOptionsInstalled()
+    private void Awake()
+    {
+        Instance = this;
+        QuestPickerConfig.LoadConfig(config: Config);
+        Harmony.CreateAndPatchAll(type: typeof(Patcher), harmonyInstanceId: ModInfo.Guid);
+
+        var modOptionsPlugin = FindModOptionsPlugin();
+        if (modOptionsPlugin != null)
         {
             try
             {
-                return AppDomain.CurrentDomain
-                    .GetAssemblies()
-                    .Any(predicate: assembly => assembly.GetName().Name == ModInfo.ModOptionsAssemblyName);
+                UIController.RegisterUI();
             }
             catch (Exception ex)
             {
-                Log(payload: $"Error while checking for Mod Options: {ex.Message}");
-                return false;
+                LogError(message: $"An error occurred during UI registration: {ex.Message}");
             }
         }
+    }
+
+    private static BaseUnityPlugin? FindModOptionsPlugin()
+    {
+        try
+        {
+            foreach (var obj in ModManager.ListPluginObject)
+            {
+                if (obj is not BaseUnityPlugin plugin)
+                {
+                    continue;
+                }
+
+                if (plugin.Info.Metadata.GUID == ModInfo.ModOptionsGuid)
+                {
+                    return plugin;
+                }
+            }
+
+            return null;
+        }
+        catch (Exception ex)
+        {
+            LogError(message: $"Error while checking for Mod Options: {ex.Message}");
+            return null;
+        }
+    }
+
+    internal static void LogDebug(object message)
+    {
+        Instance?.Logger.LogDebug(data: message);
+    }
+
+    internal static void LogInfo(object message)
+    {
+        Instance?.Logger.LogInfo(data: message);
+    }
+
+    internal static void LogError(object message)
+    {
+        Instance?.Logger.LogError(data: message);
     }
 }

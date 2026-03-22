@@ -1,15 +1,13 @@
-using QuestPicker.Patches;
 using HarmonyLib;
 
-namespace QuestPicker
+namespace QuestPicker;
+
+internal static class Patcher
 {
-    public class Patcher
+    [HarmonyPrefix]
+    [HarmonyPatch(declaringType: typeof(LayerQuestBoard), methodName: nameof(LayerQuestBoard.RefreshQuest))]
+    public static void LayerQuestBoardRefreshQuest()
     {
-        [HarmonyPrefix]
-        [HarmonyPatch(declaringType: typeof(LayerQuestBoard), methodName: nameof(LayerQuestBoard.RefreshQuest))]
-        public static void LayerQuestBoardRefreshQuest(LayerQuestBoard __instance)
-        {
-            LayerQuestBoardPatch.LayerQuestBoardRefreshQuestPrefix(__instance: __instance);
-        }
+        LayerQuestBoardPatch.LayerQuestBoardRefreshQuestPrefix();
     }
 }
