@@ -73,7 +73,7 @@ public class LayerQuestBoardPatch
 
             if (!string.IsNullOrWhiteSpace(value: questId) && LoggedInvalidSelectedQuestIds.Add(item: questId))
             {
-                Plugin.LogError(message: $"Invalid quest ID in selected quest list: {questId}");
+                QuestPicker.LogError(message: $"Invalid quest ID in selected quest list: {questId}");
             }
 
             return false;

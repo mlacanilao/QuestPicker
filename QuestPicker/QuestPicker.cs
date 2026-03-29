@@ -1,21 +1,22 @@
-﻿using System;
+using System;
+using System.Runtime.CompilerServices;
 using BepInEx;
 using HarmonyLib;
 
 namespace QuestPicker;
 
-public static class ModInfo
+internal static class ModInfo
 {
-    public const string Guid = "omegaplatinum.elin.questpicker";
-    public const string Name = "Quest Picker";
-    public const string Version = "2.0.0";
+    internal const string Guid = "omegaplatinum.elin.questpicker";
+    internal const string Name = "Quest Picker";
+    internal const string Version = "2.0.0";
     internal const string ModOptionsGuid = "evilmask.elinplugins.modoptions";
 }
 
 [BepInPlugin(GUID: ModInfo.Guid, Name: ModInfo.Name, Version: ModInfo.Version)]
-internal class Plugin : BaseUnityPlugin
+internal class QuestPicker : BaseUnityPlugin
 {
-    internal static Plugin? Instance;
+    internal static QuestPicker? Instance { get; private set; }
 
     private void Awake()
     {
@@ -23,17 +24,18 @@ internal class Plugin : BaseUnityPlugin
         QuestPickerConfig.LoadConfig(config: Config);
         Harmony.CreateAndPatchAll(type: typeof(Patcher), harmonyInstanceId: ModInfo.Guid);
 
-        var modOptionsPlugin = FindModOptionsPlugin();
-        if (modOptionsPlugin != null)
+        if (FindModOptionsPlugin() is null)
         {
-            try
-            {
-                UIController.RegisterUI();
-            }
-            catch (Exception ex)
-            {
-                LogError(message: $"An error occurred during UI registration: {ex.Message}");
-            }
+            return;
+        }
+
+        try
+        {
+            UIController.RegisterUI();
+        }
+        catch (Exception ex)
+        {
+            LogError(message: $"An error occurred during UI registration: {ex}");
         }
     }
 
@@ -58,14 +60,14 @@ internal class Plugin : BaseUnityPlugin
         }
         catch (Exception ex)
         {
-            LogError(message: $"Error while checking for Mod Options: {ex.Message}");
+            LogError(message: $"Error while checking for Mod Options: {ex}");
             return null;
         }
     }
 
-    internal static void LogDebug(object message)
+    internal static void LogDebug(object message, [CallerMemberName] string caller = "")
     {
-        Instance?.Logger.LogDebug(data: message);
+        Instance?.Logger.LogDebug(data: $"[{caller}] {message}");
     }
 
     internal static void LogInfo(object message)
