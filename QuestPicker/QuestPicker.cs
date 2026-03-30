@@ -24,7 +24,7 @@ internal class QuestPicker : BaseUnityPlugin
         QuestPickerConfig.LoadConfig(config: Config);
         Harmony.CreateAndPatchAll(type: typeof(Patcher), harmonyInstanceId: ModInfo.Guid);
 
-        if (FindModOptionsPlugin() is null)
+        if (HasModOptionsPlugin() == false)
         {
             return;
         }
@@ -39,7 +39,7 @@ internal class QuestPicker : BaseUnityPlugin
         }
     }
 
-    private static BaseUnityPlugin? FindModOptionsPlugin()
+    private static bool HasModOptionsPlugin()
     {
         try
         {
@@ -52,16 +52,16 @@ internal class QuestPicker : BaseUnityPlugin
 
                 if (plugin.Info.Metadata.GUID == ModInfo.ModOptionsGuid)
                 {
-                    return plugin;
+                    return true;
                 }
             }
 
-            return null;
+            return false;
         }
         catch (Exception ex)
         {
             LogError(message: $"Error while checking for Mod Options: {ex}");
-            return null;
+            return false;
         }
     }
 

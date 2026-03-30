@@ -1,7 +1,6 @@
 using EvilMask.Elin.ModOptions;
 using System.IO;
 using System.Reflection;
-using BepInEx;
 using EvilMask.Elin.ModOptions.UI;
 
 namespace QuestPicker;
@@ -10,35 +9,26 @@ public static class UIController
 {
     public static void RegisterUI()
     {
-        var assemblyLocation = Path.GetDirectoryName(path: Assembly.GetExecutingAssembly().Location);
+        var assemblyLocation = Path.GetDirectoryName(path: Assembly.GetExecutingAssembly().Location) ?? string.Empty;
         var xmlPath = Path.Combine(path1: assemblyLocation, path2: "QuestPickerConfig.xml");
         QuestPickerConfig.InitializeXmlPath(xmlPath: xmlPath);
 
         var xlsxPath = Path.Combine(path1: assemblyLocation, path2: "translations.xlsx");
         QuestPickerConfig.InitializeTranslationXlsxPath(xlsxPath: xlsxPath);
+        var controller = ModOptionController.Register(guid: ModInfo.Guid, tooptipId: "mod.tooltip");
 
-        foreach (var obj in ModManager.ListPluginObject)
+        if (File.Exists(path: QuestPickerConfig.XmlPath))
         {
-            if (obj is BaseUnityPlugin plugin && plugin.Info.Metadata.GUID == ModInfo.ModOptionsGuid)
-            {
-                var controller = ModOptionController.Register(guid: ModInfo.Guid, tooptipId: "mod.tooltip");
-
-                if (File.Exists(path: QuestPickerConfig.XmlPath))
-                {
-                    using (StreamReader sr = new StreamReader(path: QuestPickerConfig.XmlPath))
-                        controller.SetPreBuildWithXml(xml: sr.ReadToEnd());
-                }
-                
-                if (File.Exists(path: QuestPickerConfig.TranslationXlsxPath))
-                {
-                    controller.SetTranslationsFromXslx(path: QuestPickerConfig.TranslationXlsxPath);
-                }
-                 
-                SetTranslations(controller: controller);
-                RegisterEvents(controller: controller);
-                return;
-            }
+            controller.SetPreBuildWithXml(xml: File.ReadAllText(path: QuestPickerConfig.XmlPath));
         }
+
+        if (File.Exists(path: QuestPickerConfig.TranslationXlsxPath))
+        {
+            controller.SetTranslationsFromXslx(path: QuestPickerConfig.TranslationXlsxPath);
+        }
+
+        SetTranslations(controller: controller);
+        RegisterEvents(controller: controller);
     }
 
     private static void SetTranslations(ModOptionController controller)
