@@ -16,6 +16,11 @@ public static class UIController
         var xlsxPath = Path.Combine(path1: assemblyLocation, path2: "translations.xlsx");
         QuestPickerConfig.InitializeTranslationXlsxPath(xlsxPath: xlsxPath);
         var controller = ModOptionController.Register(guid: ModInfo.Guid, tooptipId: "mod.tooltip");
+        if (controller == null)
+        {
+            QuestPicker.LogError(message: "Failed to register Mod Options controller.");
+            return;
+        }
 
         if (File.Exists(path: QuestPickerConfig.XmlPath))
         {
@@ -60,7 +65,12 @@ public static class UIController
         {
             foreach (var questId in QuestPickerConfig.AvailableQuestIds)
             {
-                var toggle = builder.GetPreBuild<OptToggle>(id: $"{questId}Toggle");
+                var toggle = GetRequiredPreBuild<OptToggle>(builder: builder, id: $"{questId}Toggle");
+                if (toggle == null)
+                {
+                    continue;
+                }
+
                 toggle.Checked = QuestPickerConfig.IsQuestSelected(questId: questId);
                 toggle.OnValueChanged += isChecked =>
                 {
@@ -68,5 +78,16 @@ public static class UIController
                 };
             }
         };
+    }
+
+    private static T? GetRequiredPreBuild<T>(OptionUIBuilder builder, string id) where T : OptUIElement
+    {
+        T? element = builder.GetPreBuild<T>(id: id);
+        if (element == null)
+        {
+            QuestPicker.LogError(message: $"Missing Mod Options prebuilt element: {id}");
+        }
+
+        return element;
     }
 }
