@@ -56,7 +56,7 @@ public static class UIController
             return (questRow.name, questRow.name_JP);
         }
 
-        return ("Unknown Quest", "ä¸æ˜Žãªã‚¯ã‚¨ã‚¹ãƒˆ");
+        return ("Unknown Quest", "不明なクエスト");
     }
 
     private static void RegisterEvents(ModOptionController controller)
