@@ -11,6 +11,7 @@
     [h1] Features [/h1]
     [list]
     [*]Enables players to choose quests through the Config menu under the Mods Tab.
+    [*]Detects compatible modded random quests and shows them in separate sections by mod.
     [*]Compatible with existing save files.
     [*]Includes localization for English, Japanese, and Chinese.
     [/list]
@@ -28,13 +29,19 @@
     If needed, users can also edit the configuration file directly:
     [code] Steam\steamapps\common\Elin\BepInEx\config\omegaplatinum.elin.questpicker.cfg [/code]
 
-    [img]https://steamuserimages-a.akamaihd.net/ugc/5163648040624258/6B16FE06C932512C0203E24C69D25B8208D65755/?imw=5000&amp;imh=5000&amp;ima=fit&amp;impolicy=Letterbox&amp;imcolor=%23000000&amp;letterbox=false.png[/img]
+    [h1] Compatibility with Quest Mods [/h1]
+    Quest Picker is compatible with the following quest expansion mods and can detect their compatible random quests in the Config UI:
+    [list]
+    [*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3661956141]Quest Board Expansion『☆』[/url]
+    [*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3579277196]RandomQuest & GuildQuest Expansion Pack[/url]
+    [/list]
 
     [img] https://img.shields.io/badge/Supports%20Game%20Version-EA%2023.287%20Stable-green [/img]
 
     [h1] 特徴 [/h1]
     [list]
     [*]クエストボード用のカスタマイズ可能なクエスト選択機能を追加します。
+    [*]互換性のあるMOD追加のランダムクエストを検出し、MODごとに分かれたセクションで表示します。
     [*]ゲーム内の Config メニューから設定可能です。
     [*]英語、日本語、中国語の多言語サポートを提供します。
     [/list]
@@ -52,7 +59,12 @@
     必要に応じて、以下の場所から設定ファイルを直接編集することもできます：
     [code] Steam\steamapps\common\Elin\BepInEx\config\omegaplatinum.elin.questpicker.cfg [/code]
 
-    [img]https://steamuserimages-a.akamaihd.net/ugc/5163648040624477/93F9F5FBC36282B3DFA11EFDD30EF42829A0B5E4/?imw=5000&amp;imh=5000&amp;ima=fit&amp;impolicy=Letterbox&amp;imcolor=%23000000&amp;letterbox=false.png[/img]
+    [h1] クエスト拡張MODとの互換性 [/h1]
+    Quest Picker は以下のクエスト拡張MODと互換性があり、対応しているランダムクエストを Config UI 上で検出して表示できます。
+    [list]
+    [*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3661956141]Quest Board Expansion『☆』[/url]
+    [*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3579277196]RandomQuest & GuildQuest Expansion Pack[/url]
+    [/list]
 
     [img] https://img.shields.io/badge/対応ゲームバージョン-EA%2023.287%20Stable-green [/img]
   </description>

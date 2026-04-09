@@ -40,6 +40,7 @@ internal static class QuestPickerConfig
     private static ConfigEntry<string>? _selectedQuestIdsEntry;
     private static readonly List<string> _selectedQuestIds = new List<string>();
     private static readonly HashSet<string> _selectedQuestIdSet = new HashSet<string>(comparer: StringComparer.Ordinal);
+    private static readonly HashSet<string> AvailableQuestIdSetInternal = new HashSet<string>(collection: AvailableQuestIdsInternal, comparer: StringComparer.Ordinal);
 
     internal static IReadOnlyList<string> AvailableQuestIds => AvailableQuestIdsInternal;
     internal static IReadOnlyList<string> SelectedQuestIds => _selectedQuestIds;
@@ -47,6 +48,11 @@ internal static class QuestPickerConfig
     internal static bool IsQuestSelected(string questId)
     {
         return !string.IsNullOrEmpty(value: questId) && _selectedQuestIdSet.Contains(item: questId);
+    }
+
+    internal static bool IsVanillaQuestId(string questId)
+    {
+        return !string.IsNullOrEmpty(value: questId) && AvailableQuestIdSetInternal.Contains(item: questId);
     }
 
     internal static void UpdateSelectedQuestIds(IEnumerable<string> selectedQuestIds)
