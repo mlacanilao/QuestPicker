@@ -1,7 +1,7 @@
 using EvilMask.Elin.ModOptions;
+using EvilMask.Elin.ModOptions.UI;
 using System.IO;
 using System.Reflection;
-using EvilMask.Elin.ModOptions.UI;
 
 namespace QuestPicker;
 
@@ -26,13 +26,20 @@ public static class UIController
         {
             controller.SetPreBuildWithXml(xml: File.ReadAllText(path: QuestPickerConfig.XmlPath));
         }
+        else
+        {
+            QuestPicker.LogError(message: $"Mod Options XML not found: {xmlPath}");
+        }
 
         if (File.Exists(path: QuestPickerConfig.TranslationXlsxPath))
         {
             controller.SetTranslationsFromXslx(path: QuestPickerConfig.TranslationXlsxPath);
         }
+        else
+        {
+            QuestPicker.LogError(message: $"Mod Options translations not found: {xlsxPath}");
+        }
 
-        SetTranslations(controller: controller);
         RegisterEvents(controller: controller);
     }
 
@@ -40,29 +47,46 @@ public static class UIController
     {
         foreach (var questId in QuestPickerConfig.AvailableQuestIds)
         {
-            var (name, nameJP) = GetQuestNames(id: questId);
-
+            var (name, nameJP, nameCN) = GetQuestNames(id: questId);
             controller.SetTranslation(id: $"{questId}.toggle.tooltip",
                 en: name,
                 jp: nameJP,
-                cn: name);
+                cn: nameCN);
         }
     }
-    
-    public static (string name, string nameJP) GetQuestNames(string id)
+
+    public static (string name, string nameJP, string nameCN) GetQuestNames(string id)
     {
         if (EClass.sources.quests.map.TryGetValue(key: id, value: out var questRow))
         {
-            return (questRow.name, questRow.name_JP);
+            string localizedName = GetLocalizedQuestName(questRow: questRow);
+            return (name: questRow.name, nameJP: questRow.name_JP, nameCN: localizedName);
         }
 
-        return ("Unknown Quest", "不明なクエスト");
+        return (name: "Unknown Quest", nameJP: "Unknown Quest", nameCN: "Unknown Quest");
+    }
+
+    private static string GetLocalizedQuestName(SourceQuest.Row questRow)
+    {
+        if (!string.IsNullOrWhiteSpace(value: questRow.name_L))
+        {
+            return questRow.name_L;
+        }
+
+        string localizedName = questRow.GetText(id: "name", returnNull: false);
+        if (!string.IsNullOrWhiteSpace(value: localizedName))
+        {
+            return localizedName;
+        }
+
+        return questRow.name;
     }
 
     private static void RegisterEvents(ModOptionController controller)
     {
         controller.OnBuildUI += builder =>
         {
+            SetTranslations(controller: controller);
             foreach (var questId in QuestPickerConfig.AvailableQuestIds)
             {
                 var toggle = GetRequiredPreBuild<OptToggle>(builder: builder, id: $"{questId}Toggle");
@@ -71,6 +95,9 @@ public static class UIController
                     continue;
                 }
 
+                // Prebuilt XML toggles resolve tooltip IDs before OnBuildUI, so refresh the
+                // live tooltip after injecting runtime quest-name translations.
+                RefreshToggleTooltip(toggle: toggle, controller: controller, questId: questId);
                 toggle.Checked = QuestPickerConfig.IsQuestSelected(questId: questId);
                 toggle.OnValueChanged += isChecked =>
                 {
@@ -78,6 +105,18 @@ public static class UIController
                 };
             }
         };
+    }
+
+    private static void RefreshToggleTooltip(OptToggle toggle, ModOptionController controller, string questId)
+    {
+        string tooltipText = controller.Tr(contentId: $"{questId}.toggle.tooltip");
+        if (string.IsNullOrWhiteSpace(value: tooltipText))
+        {
+            return;
+        }
+
+        toggle.Base.tooltip.text = tooltipText;
+        toggle.Base.tooltip.enable = true;
     }
 
     private static T? GetRequiredPreBuild<T>(OptionUIBuilder builder, string id) where T : OptUIElement
